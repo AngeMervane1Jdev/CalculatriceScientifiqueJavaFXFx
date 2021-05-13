@@ -2,7 +2,6 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -71,12 +70,10 @@ public class Controller implements Initializable {
     public Button bfois;
     public Button bdiv;
     public Button bequal;
-    public static String retour="";
     public TextField opperation;
     public static TextField opperationPassed;
     public Button bshift;
     public MenuBar menuBar;
-    public Label helpText;
     private String Memoire;
     private boolean is2ndf=false,isPlSs=false, isBin=false, isHex=false, isDec=true, isOct=false, isDeg=true, isOn=true;
     private int plusCount=0, sousCount=0, mulCount=0, divCount=0, powCount=0, modCount=0;
@@ -95,8 +92,8 @@ public class Controller implements Initializable {
         mes_Bouttons=asList(bDEG,bD,bP1,bEXP10,bsin,b7,b4,b1,b0,bA,bE,bP2,bEXP,bcos,b8,b5,bB,b2,bpoint,bF,bCHAP,bFACT,btan,b9,b6,b3,bmoins,bc,bEXP3,bSqrt,bLn,bmod,bplus,brm,bmoin,b10E,bDEL,bdivX,brac3,bPi,bac,bxm,bfois,bdiv,bequal);
         System.out.println(mes_Bouttons.get(0).getText());
         changerClavier();
-
     }
+
     public void init(){
         numbers=new ArrayList<>();
         opperators=new ArrayList<>();
@@ -106,7 +103,7 @@ public class Controller implements Initializable {
         mulCount=0;
         modCount=0;
         powCount=0;
-        Memoire="";
+        isPlSs=false;
         is2ndf = false;
     }
 
@@ -142,10 +139,10 @@ public class Controller implements Initializable {
 
                case "Ln/Log":
                    if (is2ndf) {
-                       opperation.setText(opperation.getText() + "log");
+                       opperation.setText(opperation.getText() + "log(");
                        is2ndf = false;
                    } else
-                       opperation.setText(opperation.getText() + "ln");
+                       opperation.setText(opperation.getText() + "ln(");
 
                    break;
                case "10^x":
@@ -174,8 +171,13 @@ public class Controller implements Initializable {
                    opperation.setText(opperation.getText() + "!");
                    break;
                case "DEL":
-                   if (opperation.getText().length() > 1)
+                   if (opperation.getText().length() > 0) {
                        opperation.setText(opperation.getText().substring(0, opperation.getText().length() - 1));
+                   if(opperation.getText().length()==0){
+                       init();
+
+                    }
+                   }
                    else
                        init();
                    break;
@@ -372,6 +374,7 @@ public class Controller implements Initializable {
                 break;
             case "C":
                 opperation.setText("");
+                isPlSs=false;
                 init();
                 break;
             case "OFF":
@@ -382,6 +385,8 @@ public class Controller implements Initializable {
                 }
                 menuBar.setDisable(false);
                 changerClavier();
+                Memoire="";
+                isPlSs=false;
                 isOn=false;
                 break;
             case "ON":
@@ -391,6 +396,7 @@ public class Controller implements Initializable {
                 }
                 menuBar.setDisable(true);
                 init();
+                Memoire="";
                 isOn=true;
                 break;
         }
@@ -602,75 +608,56 @@ public class Controller implements Initializable {
         }
     }
     public void changerClavier(){
-        //afficherHistorique();
         previewText="";
+        Memoire="";
         opperation.setText("");
         if(isBin){
             for (Button btn:mes_Bouttons) {
-                if(!btn.getText().equals("0") && !btn.getText().equals("1") &&
-                        !btn.getText().equals("-")&& !btn.getText().equals("*")&&
-                        !btn.getText().equals("/")&&!btn.getText().equals("+") &&
-                        !btn.getText().equals("+/-")&&!btn.getText().equals("=")
-                        &&!btn.getText().equals("DEL")&&!btn.getText().equals("XM")
-                        &&!btn.getText().equals("RM")&&!btn.getText().equals("AC")){
-                    btn.setDisable(true);
-                }
-                else{
-                    btn.setDisable(false);
-                }
+                btn.setDisable(!btn.getText().equals("0") && !btn.getText().equals("1") &&
+                        !btn.getText().equals("-") && !btn.getText().equals("*") &&
+                        !btn.getText().equals("/") && !btn.getText().equals("+") &&
+                        !btn.getText().equals("+/-") && !btn.getText().equals("=")
+                        && !btn.getText().equals("DEL") && !btn.getText().equals("XM")
+                        && !btn.getText().equals("RM") && !btn.getText().equals("AC"));
             }
         }
         else if(isOct){
             for (Button btn:mes_Bouttons) {
-                if(!btn.getText().equals("0") && !btn.getText().equals("1") && !btn.getText().equals("-")&&
-                        !btn.getText().equals("*") && !btn.getText().equals("/")&&
-                        !btn.getText().equals("+") && !btn.getText().equals("+/-")&&
+                btn.setDisable(!btn.getText().equals("0") && !btn.getText().equals("1") && !btn.getText().equals("-") &&
+                        !btn.getText().equals("*") && !btn.getText().equals("/") &&
+                        !btn.getText().equals("+") && !btn.getText().equals("+/-") &&
                         !btn.getText().equals("=") &&
-                        !btn.getText().equals("2") && !btn.getText().equals("3")&&
-                        !btn.getText().equals("4") && !btn.getText().equals("5")&&
+                        !btn.getText().equals("2") && !btn.getText().equals("3") &&
+                        !btn.getText().equals("4") && !btn.getText().equals("5") &&
                         !btn.getText().equals("6") && !btn.getText().equals("7")
-                        &&!btn.getText().equals("DEL")&&!btn.getText().equals("XM")&&
-                        !btn.getText().equals("RM")&&!btn.getText().equals("AC")){
-                    btn.setDisable(true);
-                }
-                else{
-                    btn.setDisable(false);
-                }
+                        && !btn.getText().equals("DEL") && !btn.getText().equals("XM") &&
+                        !btn.getText().equals("RM") && !btn.getText().equals("AC"));
             }
         }
         else if(isHex){
 
             for (Button btn:mes_Bouttons) {
-                if(!btn.getText().equals("0") && !btn.getText().equals("1") && !btn.getText().equals("-")&&
-                        !btn.getText().equals("*") && !btn.getText().equals("/")&&
-                        !btn.getText().equals("2") && !btn.getText().equals("3")&&
-                        !btn.getText().equals("4") && !btn.getText().equals("5")&&
-                        !btn.getText().equals("6") && !btn.getText().equals("7")&&
-                        !btn.getText().equals("8") && !btn.getText().equals("9")&&
-                        !btn.getText().equals("A") && !btn.getText().equals("B")&&
-                        !btn.getText().equals("C") && !btn.getText().equals("D")&&
+                btn.setDisable(!btn.getText().equals("0") && !btn.getText().equals("1") && !btn.getText().equals("-") &&
+                        !btn.getText().equals("*") && !btn.getText().equals("/") &&
+                        !btn.getText().equals("2") && !btn.getText().equals("3") &&
+                        !btn.getText().equals("4") && !btn.getText().equals("5") &&
+                        !btn.getText().equals("6") && !btn.getText().equals("7") &&
+                        !btn.getText().equals("8") && !btn.getText().equals("9") &&
+                        !btn.getText().equals("A") && !btn.getText().equals("B") &&
+                        !btn.getText().equals("C") && !btn.getText().equals("D") &&
                         !btn.getText().equals("E") && !btn.getText().equals("F") &&
-                        !btn.getText().equals("+") && !btn.getText().equals("+/-")&&
-                        !btn.getText().equals("=")&&!btn.getText().equals("DED")&&
-                        !btn.getText().equals("XM")&&!btn.getText().equals("RM")&&
-                        !btn.getText().equals("AC")){
-                      btn.setDisable(true);
-                }
-                else{
-                    btn.setDisable(false);
-                }
+                        !btn.getText().equals("+") && !btn.getText().equals("+/-") &&
+                        !btn.getText().equals("=") && !btn.getText().equals("DED") &&
+                        !btn.getText().equals("XM") && !btn.getText().equals("RM") &&
+                        !btn.getText().equals("AC") &&!btn.getText().equals("DEL"));
             }
 
         }
         else if(isDec){
             for (Button btn:mes_Bouttons) {
-                if(!btn.getText().equals("A") && !btn.getText().equals("B")&&
-                        !btn.getText().equals("C") && !btn.getText().equals("D")&&
-                        !btn.getText().equals("E") && !btn.getText().equals("F")){
-                      btn.setDisable(false);
-                }else {
-                   btn.setDisable(true);
-                }
+                btn.setDisable(btn.getText().equals("A") || btn.getText().equals("B") ||
+                        btn.getText().equals("C") || btn.getText().equals("D") ||
+                        btn.getText().equals("E") || btn.getText().equals("F"));
             }
         }
 
@@ -702,7 +689,7 @@ public class Controller implements Initializable {
         }
     }
 
-    public void mAide(Event event) throws IOException {
+    public void mAide() {
     Helper h=new Helper();
     h.doer();
     }

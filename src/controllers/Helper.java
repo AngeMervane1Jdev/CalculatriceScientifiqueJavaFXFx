@@ -28,15 +28,13 @@ public class Helper implements Initializable {
                 "2-Conseils\n" +
                 "Tout calcul requiert l'utilisation d'un oppérateur quand c'est nécessaire\n" +
                 "Evitez les parenthèses au profit du signe *.\n" +
+                "Mais vous pouvez faire [ 2sin(30),2e^(2),15cos(10) ] par exemple" +
                 "Exemple : 2*3 en lieu et place de (2)(3)\n" +
-                "Evitez l'exces d'oppérateurs (2**2 et 2//2 et 2---2 et 2+++*-2) \n" +
-                "Vous pouvez utiliser\"shift\" pour arccos, arcsin arctan (shift+sin) par excemple\n" +
-                "Passez en Degré ou en radian avec le boutton \"DEG\"\n" +
-                "Lorsque vous changer de base, les oppérations sont réduites mais nous\n" +
+                "Evitez l'exces d'oppérateurs (2**2 et 2//2 et 2---2 et 2+++*-2)\n"+
+                "Lorsque vous changer de base, les oppérations sont réduites\n" +
                "Utilisez le bouton +/- lorsque vous voulez faire par exemple (-5+5)\n" +
                "N'utilisez en aucun cas les parenthèses sauf si on vous en propose ou quand\n" +
-               "vous les effacez par inadvertance et qu'il faudra les remettre.\n" +
-                "vous assurons que le strict nécésaire y est\n\n" +
+               "vous les effacez par inadvertance et qu'il faudra les remettre.\n\n" +
                 "Merci d'avoir lu et faites en un bon usage.";
                  helpText.setText(text);
 

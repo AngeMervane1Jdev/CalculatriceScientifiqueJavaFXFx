@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.awt.*;
+
 public class Main extends Application {
 public static Stage stage;
     @Override
@@ -16,7 +18,6 @@ public static Stage stage;
         primaryStage.setScene(new Scene(root, 600, 700));
         primaryStage.setResizable(false);
         primaryStage.centerOnScreen();
-        primaryStage.setOnCloseRequest(null);
         primaryStage.show();
 
 

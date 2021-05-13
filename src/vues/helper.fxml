@@ -7,15 +7,21 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Helper">
     <children>
-        <Label prefHeight="20.0" prefWidth="599.0" style="-fx-background-color: silver;" text="~Build by AMAV~" />
-        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="54.0" prefWidth="600.0" text="~HELP PAGE~" underline="true">
+        <Label lineSpacing="0.5" prefHeight="39.0" prefWidth="630.0" style="-fx-background-color: silver;" text="Build by AMAV" textFill="#010e28">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets left="5.0" />
+         </padding></Label>
+        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="54.0" prefWidth="600.0" text="HELP PAGE" underline="true">
             <font>
                 <Font size="33.0" />
             </font>
         </Label>
-        <Label fx:id="helpText" alignment="CENTER" prefHeight="581.0" prefWidth="600.0" textAlignment="JUSTIFY">
+        <Label fx:id="helpText" alignment="CENTER" prefHeight="581.0" prefWidth="600.0" style="-fx-border-color: black;" textAlignment="JUSTIFY">
             <VBox.margin>
-                <Insets />
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </VBox.margin>
          <padding>
             <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
@@ -24,7 +30,7 @@
             <Font name="Book Antiqua" size="17.0" />
          </font>
         </Label>
-      <Button mnemonicParsing="false" onAction="#exitHelper" prefHeight="50.0" prefWidth="606.0" style="-fx-background-color: #2762ae;" text="D'accord Merci !" textFill="#f8f6f6">
+      <Button mnemonicParsing="false" onAction="#exitHelper" prefHeight="57.0" prefWidth="668.0" style="-fx-background-color: #2762ae;" text="D'accord Merci !" textFill="#f8f6f6">
          <font>
             <Font size="27.0" />
          </font></Button>
