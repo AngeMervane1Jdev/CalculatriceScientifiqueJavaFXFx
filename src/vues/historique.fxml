@@ -36,7 +36,7 @@
                   <Font name="Arial Black" size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#click" prefHeight="40.0" prefWidth="185.0" style="-fx-background-color: #fff;" text="SUPPRIMER" textFill="#d9cd32">
+            <Button mnemonicParsing="false" onAction="#click" prefHeight="40.0" prefWidth="185.0" style="-fx-background-color: #fff;" text="SUPPRIMER" textFill="#f8e50b">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>

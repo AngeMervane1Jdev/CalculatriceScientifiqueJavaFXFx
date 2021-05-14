@@ -14,7 +14,7 @@
          <padding>
             <Insets left="5.0" />
          </padding></Label>
-        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="54.0" prefWidth="600.0" text="HELP PAGE" underline="true">
+        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="49.0" prefWidth="640.0" text="HELP PAGE" underline="true">
             <font>
                 <Font size="33.0" />
             </font>

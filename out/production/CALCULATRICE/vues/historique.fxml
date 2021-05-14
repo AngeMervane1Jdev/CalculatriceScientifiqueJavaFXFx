@@ -9,7 +9,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" style="-fx-background-color: silver;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Historique">
    <children>
-      <Label prefHeight="20.0" prefWidth="599.0" text="~Build by AMAV~" />
+      <Label prefHeight="20.0" prefWidth="599.0" text=" Build by AMAV" />
       <Label alignment="CENTER" prefHeight="14.0" prefWidth="600.0" style="-fx-background-color: silver;" text="Historique">
          <font>
             <Font name="Algerian" size="34.0" />
@@ -33,17 +33,17 @@
          <children>
             <Button mnemonicParsing="false" onAction="#click" prefHeight="40.0" prefWidth="193.0" style="-fx-background-color: #fff;" text="UTILISER" textFill="GREEN">
                <font>
-                  <Font name="Algerian" size="19.0" />
+                  <Font name="Arial Black" size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#click" prefHeight="40.0" prefWidth="185.0" style="-fx-background-color: #fff;" text="SUPPRIMER" textFill="#da8331">
+            <Button mnemonicParsing="false" onAction="#click" prefHeight="40.0" prefWidth="185.0" style="-fx-background-color: #fff;" text="SUPPRIMER" textFill="#f8e50b">
                <font>
-                  <Font name="Algerian" size="22.0" />
+                  <Font name="Arial Black" size="15.0" />
                </font>
             </Button>
             <Button mnemonicParsing="false" onAction="#click" prefHeight="43.0" prefWidth="177.0" style="-fx-background-color: #fff;" text="VIDER" textFill="#b21a1a">
                <font>
-                  <Font name="Algerian" size="19.0" />
+                  <Font name="Arial Black" size="16.0" />
                </font>
             </Button>
          </children>

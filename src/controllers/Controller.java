@@ -385,11 +385,13 @@ public class Controller implements Initializable {
                 }
                 menuBar.setDisable(false);
                 changerClavier();
+                opperation.setText("");
                 Memoire="";
                 isPlSs=false;
                 isOn=false;
                 break;
             case "ON":
+                opperation.setText("");
                 t.setText("OFF");
                 for (Button boutons:mes_Bouttons) {
                     boutons.setDisable(true);
@@ -403,12 +405,10 @@ public class Controller implements Initializable {
     }
     public void Moteur(){
         if(numbers.size()==opperators.size()){
-            if((previewText.charAt(0)=='-'&& isPlSs) || (previewText.charAt(0)=='+')){
+            if(previewText.charAt(0)=='-' || previewText.charAt(0)=='+'){
                 numbers.add(0,"0");
             }
-            else if(previewText.charAt(0)=='-'&& !isPlSs){
-                throw new NumberFormatException();
-            }
+
             else{
                 for(int i=0;i<previewText.length();i++){
                     if(isNumber(previewText.charAt(i)) && isNumber(previewText.charAt(i+1))){
@@ -550,7 +550,6 @@ public class Controller implements Initializable {
     public int searchOp(String c){
         for (int i = 0; i<opperators.size() ; i++) {
             if(opperators.get(i).equals(c)){
-                System.out.println(i);
                 return i;
             }
         }
@@ -688,7 +687,6 @@ public class Controller implements Initializable {
                 break;
         }
     }
-
     public void mAide() {
     Helper h=new Helper();
     h.doer();
