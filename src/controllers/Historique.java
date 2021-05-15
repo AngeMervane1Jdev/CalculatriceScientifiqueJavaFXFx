@@ -37,7 +37,10 @@ public class Historique implements Initializable {
 
             Controller.initHistorique();
 
-        }else if(t.getText().equals("SUPPRIMER")){
+        }
+
+        else if(t.getText().equals("SUPPRIMER"))
+        {
             if(Controller.historique.get(Controller.base).size()==1){
                 Controller.historique.get(Controller.base).remove(0);
                 Controller.results.get(Controller.base).remove(0);

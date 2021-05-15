@@ -40,7 +40,7 @@ public class Helper implements Initializable {
                  helpText.setText(text);
 
     }
-    public void doer() {
+    public void changeView() {
         try {
             Parent root=FXMLLoader.load(getClass().getResource("/vues/helper.fxml"));
             Main.getStage().setScene(new Scene(root,600,700));

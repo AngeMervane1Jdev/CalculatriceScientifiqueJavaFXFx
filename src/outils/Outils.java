@@ -14,17 +14,20 @@ public class Outils {
   static   public String fromDec(String dep,int bd)
     {
         String s="";
-        int aux=Integer.parseInt(dep);
-        while(aux/bd!=0)
+        int number=Integer.parseInt(dep);
+        while(number/bd!=0)
         {
-            if(aux%bd<10)
-            {s=(aux%bd)+s;}
+            if(number%bd<10)
+                s=(number%bd)+s;
             else
-            {s=toHexaCarct(aux%bd)+s;}
-            aux=aux/bd;
+                s=toHexaCarct(number%bd)+s;
+
+            number=number/bd;
         }
-        if(aux%bd<10) {s=(aux%bd)+s;}
-        else {s=toHexaCarct(aux%bd)+s;}
+        if(number%bd<10)
+            s=(number%bd)+s;
+        else
+            s=toHexaCarct(number%bd)+s;
         return s;
     }
     static public int conversionCarct(char c)

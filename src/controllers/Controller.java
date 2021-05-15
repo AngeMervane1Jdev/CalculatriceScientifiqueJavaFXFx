@@ -351,8 +351,8 @@ public class Controller implements Initializable {
                            numbers.add(p);
                        p = "";
                    }
-                   System.out.println(numbers + "-->" + opperators);
-                   Moteur();
+
+                   calculator();
                    break;
                default:
                    opperation.setText(opperation.getText() + t.getText());
@@ -403,7 +403,7 @@ public class Controller implements Initializable {
                 break;
         }
     }
-    public void Moteur(){
+    public void calculator(){
         if(numbers.size()==opperators.size()){
             if(previewText.charAt(0)=='-' || previewText.charAt(0)=='+'){
                 numbers.add(0,"0");
@@ -430,7 +430,7 @@ public class Controller implements Initializable {
         String a,b;
         for(int i=0;i<opperators.size();i++){
             while(powCount>0){
-                int t=searchOp("^");
+                int t= searchOpPosition("^");
                 if(t!=-1){
                     numbers.add(t,""+Math.pow(Double.parseDouble(numbers.get(t)),Double.parseDouble(numbers.get(t+1))));
                     if(numbers.size()>t+1)
@@ -439,7 +439,7 @@ public class Controller implements Initializable {
                 powCount--;
             }
             while(modCount>0){
-                int t=searchOp("%");
+                int t= searchOpPosition("%");
                 if(t!=-1){
                     BigInteger s=new BigInteger(numbers.get(t));
                     BigInteger r=new BigInteger(numbers.get(t+1));
@@ -450,7 +450,7 @@ public class Controller implements Initializable {
                 modCount--;
             }
             while(divCount>0){
-                int t=searchOp("/");
+                int t= searchOpPosition("/");
                 if(t!=-1){
                     a=numbers.get(t);b=numbers.get(t+1);
                     if(isBin){
@@ -469,7 +469,7 @@ public class Controller implements Initializable {
                 divCount--;
             }
             while(mulCount>0){
-                int t=searchOp("*");
+                int t= searchOpPosition("*");
                 if(t!=-1){
                     a=numbers.get(t);b=numbers.get(t+1);
                     if(isBin){
@@ -488,7 +488,7 @@ public class Controller implements Initializable {
                 mulCount--;
             }
             while(sousCount>0){
-                int t=searchOp("-");
+                int t= searchOpPosition("-");
                 if(t!=-1){
                     a=numbers.get(t);b=numbers.get(t+1);
                     if(isBin){
@@ -507,7 +507,7 @@ public class Controller implements Initializable {
                 sousCount--;
             }
             while(plusCount>0){
-                int t=searchOp("+");
+                int t= searchOpPosition("+");
                 if(t!=-1){
                     a=numbers.get(t);b=numbers.get(t+1);
                     if(isBin){
@@ -526,12 +526,15 @@ public class Controller implements Initializable {
                 plusCount--;
             }
         }
+      afficheResult();
+    }
+
+    private void afficheResult() {
+        System.out.println(opperators+"-->"+numbers);
         if(numbers.size()>0 && !numbers.get(0).equals("NaN")&&!numbers.get(0).equals("Infinity")) {
             opperation.setText(numbers.get(0));
-            System.out.println(results);
             results.get(base).add(numbers.get(0));
-           historique.get(base).add(previewText);
-            System.out.println(historique.get(0));
+            historique.get(base).add(previewText);
             previewText=numbers.get(0);
         }
         else if(numbers.get(0).equals("NaN")){
@@ -547,7 +550,7 @@ public class Controller implements Initializable {
     }
 
     //-------------------------------------------------------------------------
-    public int searchOp(String c){
+    public int searchOpPosition(String c){
         for (int i = 0; i<opperators.size() ; i++) {
             if(opperators.get(i).equals(c)){
                 return i;
@@ -663,7 +666,6 @@ public class Controller implements Initializable {
     }
     public void mBase(Event event) {
         MenuItem mi= (MenuItem) event.getSource();
-        System.out.println(mi.getText());
         switch (mi.getText()){
             case "Binaire":
                 base= 0;
@@ -689,6 +691,6 @@ public class Controller implements Initializable {
     }
     public void mAide() {
     Helper h=new Helper();
-    h.doer();
+    h.changeView();
     }
 }
