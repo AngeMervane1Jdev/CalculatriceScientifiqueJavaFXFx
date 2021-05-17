@@ -21,9 +21,10 @@ public class Helper implements Initializable {
                 "Voici ci-dessous quelques:\n1-Guides d'utilisation\n" +
                 "En haut de la calculatrice vous disposez de trois options\n" +
                 "=> Option où vous pouvez visiter votre historique de calcul si\n" +
-                "vous en avez. \n où quitter l'application" +
+                "vous en avez. où quitter l'application\n" +
                 "=> Base où vous pouvez changer de base de calcul vous y trouverez\n"+
                 "les bases décimale,Octale,Binaire et Hexadécimale)\n" +
+               "L'affichage de se fait selon la base dans laquelle vous êtes.\n" +
                 "=> Aide pour vous aider à faire une bonne expérience d'utilisateur\n" +
                "L'historique sera affiché selon la base dans laquelle vous vous trouvez\n\n" +
                 "2-Conseils\n" +

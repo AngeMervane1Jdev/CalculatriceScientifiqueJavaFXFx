@@ -7,7 +7,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Helper">
     <children>
-        <Label lineSpacing="0.5" prefHeight="39.0" prefWidth="630.0" style="-fx-background-color: silver;" text="Build by AMAV" textFill="#010e28">
+        <Label lineSpacing="0.5" prefHeight="39.0" prefWidth="630.0" style="-fx-background-color: silver;" textFill="#010e28">
          <VBox.margin>
             <Insets />
          </VBox.margin>

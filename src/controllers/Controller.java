@@ -2,6 +2,7 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -11,14 +12,18 @@ import javafx.stage.Stage;
 import model.Main;
 
 import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import static java.util.Arrays.asList;
+import static java.util.Arrays.binarySearch;
 import static outils.Outils.*;
 
 public class Controller implements Initializable {
@@ -80,6 +85,7 @@ public class Controller implements Initializable {
     private ArrayList<String>numbers=new ArrayList<>(), opperators=new ArrayList<>();
     private String previewText;
     public static int base=2;
+    public   Alert al=new Alert(null,null);
 
     public static ArrayList<ArrayList<String>> results, historique;
     private List<Button> mes_Bouttons;
@@ -360,7 +366,10 @@ public class Controller implements Initializable {
 
            }
        }catch (Exception ex){
-           JOptionPane.showMessageDialog(null,"Veuillez verifier votre syntaxe ou consultez le menu d'aide","Alert",JOptionPane.ERROR_MESSAGE);
+           al.setAlertType(Alert.AlertType.ERROR);
+           al.setContentText("Veuillez verifier votre syntaxe ou consultez le menu d'aide");
+           al.setTitle("Operation error!");
+           al.show();
            init();
            opperation.setText("");
        }
@@ -604,7 +613,10 @@ public class Controller implements Initializable {
                     second.initModality(Modality.WINDOW_MODAL);
                     second.show();
                 }else {
-                    JOptionPane.showMessageDialog(null, "Vous n'avez pas d'historique", "Historique", JOptionPane.INFORMATION_MESSAGE);
+                    al.setAlertType(Alert.AlertType.INFORMATION);
+                    al.setContentText("Vous n'avez pas d'historique");
+                    al.setTitle("Empty historique");
+                    al.show();
                     break;
                 }
         }

@@ -9,7 +9,6 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" style="-fx-background-color: silver;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Historique">
    <children>
-      <Label prefHeight="20.0" prefWidth="599.0" text=" Build by AMAV" />
       <Label alignment="CENTER" prefHeight="14.0" prefWidth="600.0" style="-fx-background-color: silver;" text="Historique">
          <font>
             <Font name="Algerian" size="34.0" />

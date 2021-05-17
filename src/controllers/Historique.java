@@ -3,16 +3,19 @@ package controllers;
 import controllers.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextInputDialog;
 
 import javax.swing.*;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
 public class Historique implements Initializable {
-
+   public Alert al=new Alert(Alert.AlertType.ERROR);
     public TextArea HistArea;
     //--------------------------------------------------
     public void afficherHistorique(){
@@ -23,78 +26,93 @@ public class Historique implements Initializable {
             newHist+=(index+1)+"°) "+t+"="+Controller.results.get(Controller.base).get(index)+"\n";
             index++;
         }
-        if(newHist.equals("")){
-            newHist="Votre historique est vide";
-        }
+
         HistArea.setText(newHist);
     }
     public void click(ActionEvent actionEvent) {
-        Button t= (Button) actionEvent.getSource();
-        if(t.getText().equals("VIDER")){
-            if (Controller.results.get(Controller.base).size()>0){
-                HistArea.setText("");
+        if(Controller.results.get(Controller.base).size()!=0){
+            Button t= (Button) actionEvent.getSource();
+            if(t.getText().equals("VIDER")){
+                if (Controller.results.get(Controller.base).size()>0){
+                    HistArea.setText("");
+                }
+                Controller.initHistorique();
+
             }
 
-            Controller.initHistorique();
+            else if(t.getText().equals("SUPPRIMER"))
+            {
+                if(Controller.historique.get(Controller.base).size()==1){
+                    Controller.historique.get(Controller.base).remove(0);
+                    Controller.results.get(Controller.base).remove(0);
+                    afficherHistorique();
 
-        }
+                }
+                else {
+                    try {
+                        TextInputDialog dialog=new TextInputDialog();
+                        dialog.setContentText("Numéros de la ligner à supprimer");
+                        dialog.setTitle("Suppression");
+                        Optional<String> result=dialog.showAndWait();
+                        if(result.isPresent()){
+                            String rep=result.get();
+                            Controller.historique.get(Controller.base).remove(Integer.parseInt(rep) - 1);
+                            Controller.results.get(Controller.base).remove(Integer.parseInt(rep) - 1);
+                            afficherHistorique();
 
-        else if(t.getText().equals("SUPPRIMER"))
-        {
-            if(Controller.historique.get(Controller.base).size()==1){
-                Controller.historique.get(Controller.base).remove(0);
-                Controller.results.get(Controller.base).remove(0);
-                afficherHistorique();
+                        }
 
+                    } catch (NumberFormatException ex) {
+                        al.setContentText("Veuillez entrez un entier");
+                        al.show();
+                    } catch (IndexOutOfBoundsException ex) {
+                        if (Controller.historique.get(Controller.base).size() > 0)
+                            al.setContentText("Veuillez choisir un numéro comprit entre 1 et " + Controller.historique.get(Controller.base).size());
+                        al.show();
+                    }
+                }
             }
             else {
-                try {
-                    String rep = JOptionPane.showInputDialog("Numéros de la ligner à supprimer");
-                    if (rep != null) {
-                        Controller.historique.get(Controller.base).remove(Integer.parseInt(rep) - 1);
-                        Controller.results.get(Controller.base).remove(Integer.parseInt(rep) - 1);
-                        afficherHistorique();
-
+                if (Controller.historique.get(Controller.base).size() == 1) {
+                    Controller.opperationPassed.setText(Controller.historique.get(Controller.base).get(0));
+                    Controller.second.close();
+                } else {
+                    try {
+                        TextInputDialog dialog=new TextInputDialog();
+                        dialog.setContentText("Quelle numéro de ligne ?");
+                        dialog.setTitle("Rapide use");
+                        Optional<String> result=dialog.showAndWait();
+                        if (result.isPresent()) {
+                            String rep=result.get();
+                            Controller.opperationPassed.setText(Controller.historique.get(Controller.base).get(Integer.parseInt(rep) - 1));
+                            Controller.second.close();
+                        }
+                    } catch (NumberFormatException ex) {
+                        al.setContentText("Veuillez entrez un entier");
+                        al.show();
+                    } catch (IndexOutOfBoundsException ex) {
+                        if (Controller.historique.get(Controller.base).size() > 0)
+                            al.setContentText("Veuillez choisir un numéro comprit entre 1 et " + Controller.historique.get(Controller.base).size());
+                        else
+                            al.setContentText("Votre hstorique est vide");
+                        al.show();
                     }
-
-
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Veuillez entrez un entier");
-                } catch (IndexOutOfBoundsException ex) {
-                    if (Controller.historique.get(Controller.base).size() > 0)
-                        JOptionPane.showMessageDialog(null, "Veuillez choisir un numéro comprit entre 1 et " + Controller.historique.get(Controller.base).size());
-                    else
-                        JOptionPane.showMessageDialog(null, "Votre hstorique est vide");
                 }
             }
         }
-        else {
-            if (Controller.historique.get(Controller.base).size() == 1) {
-                Controller.opperationPassed.setText(Controller.historique.get(Controller.base).get(0));
-                Controller.second.close();
-            } else {
-                try {
-                    String rep = JOptionPane.showInputDialog("Quelle numéro de ligne ?");
-                    System.out.println(rep);
-                    if (rep != null) {
-                        Controller.opperationPassed.setText(Controller.historique.get(Controller.base).get(Integer.parseInt(rep) - 1));
-                        Controller.second.close();
-                    }
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Veuillez entrez un entier");
-                } catch (IndexOutOfBoundsException ex) {
-                    if (Controller.historique.get(Controller.base).size() > 0)
-                        JOptionPane.showMessageDialog(null, "Veuillez choisir un numéro comprit entre 1 et " + Controller.historique.get(Controller.base).size());
-                    else
-                        JOptionPane.showMessageDialog(null, "Votre hstorique est vide");
-                }
-            }
+        else{
+            al.setAlertType(Alert.AlertType.INFORMATION);
+            al.setContentText("Votre historique est vide");
+            al.showAndWait();
+            al.setAlertType(Alert.AlertType.ERROR);
         }
+
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         afficherHistorique();
+
     }
 }
